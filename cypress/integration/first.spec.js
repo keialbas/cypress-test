@@ -27,15 +27,28 @@ describe('Our First Test', () =>{
         //.check({force: true})
         //.should("be.checked")
 
-        cy.contains('nb-card', 'Using the Grid')
-        .find('#inputEmail1').type("hola@gmail.com")
-        .parents('nb-card')
-        .find('#inputPassword2').type("1234")
-        .parents('nb-card')
-        .find('span')
-        .contains('Option 2')
-        .siblings('input[type="radio"]')
-        .check({force: true})
+        // cy.contains('nb-card', 'Using the Grid')
+        // .find('#inputEmail1').type("hola@gmail.com")
+        // .parents('nb-card')
+        // .find('#inputPassword2').type("1234")
+        // .parents('nb-card')
+        // .find('span')
+        // .contains('Option 2')
+        // .siblings('input[type="radio"]')
+        // .check({force: true})
+
+        cy.contains('nb-card', 'Using the Grid').then( parentElement =>{
+            const emailField = parentElement.find('#inputEmail1')
+            const passwordField = parentElement.find('#inputPassword2')
+            const radioButton = parentElement.find('span:contains(Option 2)').siblings('input[type="radio"]')
+
+            cy.wrap(emailField).type("hola")
+            cy.wrap(passwordField).type("hola")
+            cy.wrap(radioButton).check({force: true})
+            //emailField.val("hola@gmail.com")
+            //passwordField.val("1234")
+            //radioButton.prop('checked', true);
+        })
 
     })
 
